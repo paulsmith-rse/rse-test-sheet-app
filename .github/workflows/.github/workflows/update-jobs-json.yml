@@ -1,0 +1,32 @@
+Use this code:
+
+name: Update jobs.json from Power Automate
+
+on:
+  repository_dispatch:
+    types: [update-jobs-json]
+
+permissions:
+  contents: write
+
+jobs:
+  update-jobs-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Write jobs.json
+        run: |
+          cat > jobs.json << 'EOF'
+          ${{ toJson(github.event.client_payload.jobs) }}
+          EOF
+
+      - name: Commit and push jobs.json
+        run: |
+          git config user.name "RSE Test App Automation"
+          git config user.email "actions@github.com"
+          git add jobs.json
+          git commit -m "Update jobs.json from RSE Test Register" || echo "No changes to commit"
+          git push
