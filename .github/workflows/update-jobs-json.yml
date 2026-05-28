@@ -28,3 +28,6 @@ jobs:
           git add jobs.json
           git commit -m "Update jobs.json from RSE Test Register" || echo "No changes to commit"
           git push
+      - name: Trigger Netlify deploy
+        run: |
+          curl -X POST "${{ secrets.NETLIFY_BUILD_HOOK_URL }}"
