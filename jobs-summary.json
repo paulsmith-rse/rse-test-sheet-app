@@ -1,0 +1,9 @@
+{
+  "source": "RSE Test Register.csv",
+  "job_count": 59,
+  "statuses": {
+    "Testing decision required": 58,
+    "Cleared": 1
+  },
+  "note": "This jobs.json was generated from the uploaded RSE Test Register export."
+}
